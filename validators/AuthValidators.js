@@ -17,5 +17,6 @@ exports.store = [
     } else {
       return value;
     }
-  })
+  }),
+  check('role').notEmpty(),
 ];

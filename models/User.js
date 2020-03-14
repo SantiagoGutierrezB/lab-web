@@ -1,5 +1,5 @@
 const knex = require('../database/connection');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 /**
  * Encuentra al usuario que tenga el correo indicado
@@ -32,5 +32,9 @@ exports.create = (user) => {
   // Encripta la contraseña
   pass = bcrypt.hashSync(pass, 10);
   return knex('users')
-    .insert({ name: user.name, email: user.email, password: pass });
+    .insert({ name: user.name, email: user.email, password: pass, role: user.role });
+}
+
+exports.all = () => {
+  return knex.from('users').select('*');
 }
